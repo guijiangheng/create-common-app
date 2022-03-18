@@ -1,0 +1,21 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.addMissingImports": true
+  },
+
+  // Explicity set prettier formatter for ts files,
+  // otherwise built in typescript language formatter will be used
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.words": [
+    "copyfiles",
+    "eslintignore",
+    "multiselect",
+    "OPENCOLLECTIVE",
+    "tsdoc"
+  ]
+}

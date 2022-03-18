@@ -43,6 +43,7 @@ export const getDependencies = (answers: Answer) => {
       tailwind && 'postcss',
       tailwind && 'autoprefixer',
       tailwind && 'prettier-plugin-tailwindcss',
+      'lint-staged',
     ].filter(Boolean) as string[],
   ] as const;
 

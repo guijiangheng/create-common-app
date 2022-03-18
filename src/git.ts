@@ -24,7 +24,11 @@ export const tryGitInit = (root: string) => {
     return true;
   } catch (err) {
     if (didInit) {
-      emptyDir(path.resolve(root, '.git'));
+      try {
+        emptyDir(path.resolve(root, '.git'));
+      } catch {
+        // ignore
+      }
     }
   }
 

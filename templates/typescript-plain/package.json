@@ -2,5 +2,8 @@
   "name": "typescript-starter",
   "private": true,
   "version": "0.0.0",
-  "scripts": {}
+  "scripts": {},
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": "eslint --cache --fix"
+  }
 }

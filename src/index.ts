@@ -2,7 +2,7 @@ import enquirer from 'enquirer';
 import fs from 'fs';
 import path from 'path';
 
-import { copyDir, isWriteable, writeJSONFile } from './helper';
+import { copyDir, writeJSONFile } from './helper';
 import {
   getPeerDependencies,
   installDevDependencies,
@@ -128,14 +128,6 @@ const getEslintConfigs = (answers: Answer) => {
 export const createApp = async (answers: Answer) => {
   const root = path.resolve(answers.packageName);
   const appName = path.basename(root);
-
-  if (!(await isWriteable(path.dirname(root)))) {
-    console.error(
-      'The application path is not writable, please check folder permissions and try again.',
-    );
-
-    process.exit(1);
-  }
 
   try {
     await fs.promises.mkdir(root);

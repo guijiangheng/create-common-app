@@ -3,15 +3,6 @@ import stringify from 'json-stable-stringify-without-jsonify';
 import os from 'os';
 import path from 'path';
 
-export async function isWriteable(directory: string): Promise<boolean> {
-  try {
-    await fs.promises.access(directory, (fs.constants || fs).W_OK);
-    return true;
-  } catch (err) {
-    return false;
-  }
-}
-
 export const isEmpty = (dir: string) => !fs.readdirSync(dir).length;
 
 export const emptyDir = (dir: string) => {

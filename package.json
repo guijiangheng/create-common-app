@@ -1,16 +1,30 @@
 {
   "name": "create-common-app",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Create template project with one command",
-  "main": "index.js",
   "scripts": {
     "copyfiles": "cp -r templates bin",
     "dev": "yarn build && DEBUG=app:* node ./bin/index.js",
     "build": "rimraf ./bin && tsc && yarn copyfiles"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "vite",
+    "next",
+    "next.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guijiangheng/create-common-app"
+  },
+  "author": "guijiangheng <kakaxizhh@gmail.com>",
+  "license": "MIT",
+  "bin": {
+    "create-common-app": "./bin/index.js"
+  },
+  "files": [
+    "bin"
+  ],
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
     "@types/debug": "^4.1.7",

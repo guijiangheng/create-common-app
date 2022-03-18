@@ -1,3 +1,4 @@
+import { execSync } from 'child_process';
 import _debug from 'debug';
 import fs from 'fs';
 import path from 'path';
@@ -44,6 +45,10 @@ export const getDependencies = (answers: Answer) => {
       tailwind && 'autoprefixer',
       tailwind && 'prettier-plugin-tailwindcss',
       'lint-staged',
+      'husky',
+      '@commitlint/cli',
+      '@commitlint/config-conventional',
+      'pretty-quick',
     ].filter(Boolean) as string[],
   ] as const;
 
@@ -170,6 +175,48 @@ export const getEslintConfigs = (answers: Answer) => {
   return config;
 };
 
+export const trySetupLintStagedAndCommitLint = (root: string) => {
+  debug('Try setup husky, lint staged and commit lint');
+
+  try {
+    execSync('npx husky install');
+    fs.writeFileSync(
+      path.resolve(root, '.husky', 'pre-commit'),
+      `
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx pretty-quick --staged
+npx lint-staged
+    `,
+    );
+
+    fs.writeFileSync(
+      path.resolve(root, '.husky', 'commit-msg'),
+      `
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx commitlint --edit $1
+    `,
+    );
+
+    writeJSONFile(
+      {
+        extends: ['@commitlint/config-conventional'],
+      },
+      path.resolve(root, '.commitlintrc'),
+    );
+
+    execSync('chmod a+x .husky/pre-commit');
+    execSync('chmod a+x .husky/commit-msg');
+    execSync('git add -A', { stdio: 'ignore' });
+    execSync('git commit --amend --no-edit --no-verify', { stdio: 'ignore' });
+  } catch (err) {
+    debug('Setup husky, lint staged and commit lint failed, ', err);
+  }
+};
+
 export const createApp = (answers: Answer) => {
   debug('Create app with answers %O', answers);
 
@@ -233,5 +280,7 @@ export const createApp = (answers: Answer) => {
   );
   installDependencies(dependencies);
 
-  tryGitInit(root);
+  if (tryGitInit(root)) {
+    trySetupLintStagedAndCommitLint(root);
+  }
 };

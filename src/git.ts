@@ -23,6 +23,8 @@ export const tryGitInit = (root: string) => {
     });
     return true;
   } catch (err) {
+    debug('Init git repository failed, ', err);
+
     if (didInit) {
       try {
         emptyDir(path.resolve(root, '.git'));

@@ -12,15 +12,19 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.words": [
+    "commitlintrc",
     "copyfiles",
+    "eslintcache",
     "eslintignore",
     "IIFE",
     "jsonify",
     "kolorist",
     "multiselect",
     "OPENCOLLECTIVE",
+    "pnpm",
     "tailwindcss",
     "tsdoc",
+    "vercel",
     "vite",
     "vitejs"
   ]

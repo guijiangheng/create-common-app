@@ -17,26 +17,31 @@ export interface Answer {
   env: string[];
   typescript: boolean;
   overwrite: boolean;
+  tailwind?: boolean;
   framework: 'none' | 'vite' | 'next';
 }
 
 export const getDependencies = (answers: Answer) => {
-  const { framework, typescript, env } = answers;
+  const { framework, typescript, env, tailwind } = answers;
   const isReact = ['vite', 'next'].includes(framework);
+  const isNext = framework === 'next';
+  const isVite = framework === 'vite';
 
   const result = [
-    [
-      isReact && 'react',
-      isReact && 'react-dom',
-      framework === 'next' && 'next',
-    ].filter(Boolean) as string[],
+    [isReact && 'react', isReact && 'react-dom', isNext && 'next'].filter(
+      Boolean,
+    ) as string[],
     [
       typescript && 'typescript',
-      framework === 'vite' && 'vite',
-      framework === 'vite' && '@vitejs/plugin-react',
-      (env.includes('node') || framework === 'next') && '@types/node',
+      isVite && 'vite',
+      isVite && '@vitejs/plugin-react',
+      (env.includes('node') || isNext) && '@types/node',
       typescript && isReact && '@types/react',
       typescript && isReact && '@types/react-dom',
+      tailwind && 'tailwindcss',
+      tailwind && 'postcss',
+      tailwind && 'autoprefixer',
+      tailwind && 'prettier-plugin-tailwindcss',
     ].filter(Boolean) as string[],
   ] as const;
 
@@ -180,8 +185,9 @@ export const createApp = (answers: Answer) => {
   const template = [
     answers.typescript ? 'typescript' : 'javascript',
     answers.framework === 'none' && 'plain',
-    answers.framework === 'vite' && 'react',
+    answers.framework === 'vite' && 'vite',
     answers.framework === 'next' && 'next',
+    answers.tailwind && 'tailwind',
   ]
     .filter(Boolean)
     .join('-');

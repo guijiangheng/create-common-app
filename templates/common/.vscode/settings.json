@@ -6,6 +6,10 @@
     "source.addMissingImports": true
   },
 
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+
   // Explicity set prettier formatter for ts files,
   // otherwise built in typescript language formatter will be used
   "[typescript]": {

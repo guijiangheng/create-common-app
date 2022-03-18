@@ -70,6 +70,11 @@ import { isValidPackageName } from './npm-utils';
             { title: 'Node', value: 'node' },
           ],
         },
+        {
+          type: (_, values) => (values.framework !== 'none' ? 'confirm' : null),
+          name: 'tailwind',
+          message: 'Use tailwind css?',
+        },
       ],
       {
         onCancel: () => {

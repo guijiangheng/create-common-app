@@ -4,7 +4,13 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["airbnb-typescript/base", "prettier"],
+  "extends": [
+    "airbnb/base",
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -19,8 +25,13 @@
   ],
   "rules": {
     "tsdoc/syntax": "warn",
+    "no-continue": "off",
+    "no-param-reassign": "off",
+    "no-restricted-syntax": "off",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off"
   }
 }

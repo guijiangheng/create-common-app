@@ -48,13 +48,16 @@ export const copy = (src: string, dest: string) => {
   }
 };
 
-export const writeJSONFile = (config: Object, filePath: string) => {
+export const writeJSONFile = (
+  config: Record<string, unknown>,
+  filePath: string,
+) => {
   fs.writeFileSync(
     filePath,
-    stringify(config, {
+    (stringify(config, {
       cmp: (a: any, b: any) => (a.key > b.key ? 1 : -1),
-      space: 4,
-    }) + os.EOL,
+      space: 2,
+    }) as string) + os.EOL,
     'utf8',
   );
 };

@@ -14,8 +14,10 @@
   "cSpell.words": [
     "copyfiles",
     "eslintignore",
+    "jsonify",
     "multiselect",
     "OPENCOLLECTIVE",
-    "tsdoc"
+    "tsdoc",
+    "vite"
   ]
 }

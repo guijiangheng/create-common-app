@@ -141,6 +141,7 @@ const getEslintConfigs = (answers: Answer) => {
   config.extends = [
     isReact ? 'airbnb' : 'airbnb/base',
     typescript && (isReact ? 'airbnb-typescript' : 'airbnb-typescript/base'),
+    isReact && 'airbnb/hooks',
     isReact && 'plugin:react/jsx-runtime',
     typescript && 'plugin:@typescript-eslint/recommended',
     typescript &&

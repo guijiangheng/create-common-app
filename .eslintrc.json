@@ -28,10 +28,12 @@
     "no-continue": "off",
     "no-param-reassign": "off",
     "no-restricted-syntax": "off",
+    "no-nested-ternary": "off",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "import/prefer-default-export": "off",
     "@typescript-eslint/no-unsafe-call": "off",
-    "@typescript-eslint/no-unsafe-member-access": "off"
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-floating-promises": ["error", { "ignoreIIFE": true }]
   }
 }

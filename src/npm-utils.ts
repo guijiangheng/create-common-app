@@ -3,6 +3,19 @@ import _debug from 'debug';
 
 const debug = _debug('app:npm-utils');
 
+export const isValidPackageName = (projectName: string) =>
+  /^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/.test(
+    projectName,
+  );
+
+export const toValidPackageName = (projectName: string) =>
+  projectName
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/^[._]/, '')
+    .replace(/[^a-z0-9-~]+/g, '-');
+
 export const fetchPeerDependencies = (packageName: string) => {
   debug(`Fetching peerDependencies of ${packageName}`);
 

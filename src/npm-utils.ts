@@ -115,7 +115,7 @@ export const installDependencies = (
 
   const result = spawn.sync(
     'npm',
-    (['i', dev && '--save-dev'].filter(Boolean) as string[]).concat(packages),
+    ['i', dev ? '--save-dev' : ''].concat(packages),
     {
       stdio: 'inherit',
       env: { ...process.env, ADBLOCK: '1', DISABLE_OPENCOLLECTIVE: '1' },

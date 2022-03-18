@@ -3,7 +3,7 @@ import { red } from 'kolorist';
 import path from 'path';
 import prompts from 'prompts';
 
-import { Answer, createApp } from './builder';
+import { createApp } from './builder';
 import { isEmpty } from './helper';
 import { isValidPackageName } from './npm-utils';
 

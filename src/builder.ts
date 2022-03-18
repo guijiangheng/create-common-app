@@ -91,7 +91,7 @@ export const getEslintConfigs = (answers: Answer) => {
       es2021: true,
     },
     parserOptions: {
-      ecmaVersion: 'latest',
+      ecmaVersion: 2021,
       sourceType: 'module',
     },
     extends: [],
@@ -122,6 +122,8 @@ export const getEslintConfigs = (answers: Answer) => {
 
   if (isReact) {
     Object.assign(config.rules, {
+      'react/jsx-props-no-spreading': 'off',
+      'react/function-component-definition': 'off',
       'react/self-closing-comp': ['error', { component: true, html: true }],
     });
   }
@@ -210,8 +212,16 @@ export const createApp = (answers: Answer) => {
   writeJSONFile(config, path.join(root, '.eslintrc.json'));
 
   debug('Installing dependencies');
+  installDependencies(
+    devDependencies
+      .concat(eslintDevDependencies)
+      .filter(
+        (devPackage) =>
+          !dependencies.includes(/^(@?[^@]+)@?.*$/.exec(devPackage)?.[1] || ''),
+      ),
+    {
+      dev: true,
+    },
+  );
   installDependencies(dependencies);
-  installDependencies(devDependencies.concat(eslintDevDependencies), {
-    dev: true,
-  });
 };

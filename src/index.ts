@@ -31,6 +31,8 @@ const getDependencies = (answers: Answer) => {
     ].filter(Boolean) as string[],
     [
       typescript && 'typescript',
+      framework === 'vite' && 'vite',
+      framework === 'vite' && '@vitejs/plugin-react',
       (env.includes('node') || framework === 'next') && '@types/node',
       typescript && isReact && '@types/react',
       typescript && isReact && '@types/react-dom',
@@ -139,6 +141,7 @@ const getEslintConfigs = (answers: Answer) => {
   config.extends = [
     isReact ? 'airbnb' : 'airbnb/base',
     typescript && (isReact ? 'airbnb-typescript' : 'airbnb-typescript/base'),
+    isReact && 'plugin:react/jsx-runtime',
     typescript && 'plugin:@typescript-eslint/recommended',
     typescript &&
       'plugin:@typescript-eslint/recommended-requiring-type-checking',

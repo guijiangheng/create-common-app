@@ -2,6 +2,7 @@ import _debug from 'debug';
 import fs from 'fs';
 import path from 'path';
 
+import { tryGitInit } from './git';
 import { copyDir, emptyDir, writeJSONFile } from './helper';
 import {
   getPeerDependencies,
@@ -230,4 +231,6 @@ export const createApp = (answers: Answer) => {
     },
   );
   installDependencies(dependencies);
+
+  tryGitInit(root);
 };

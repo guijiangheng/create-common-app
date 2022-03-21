@@ -5,7 +5,7 @@ import prompts from 'prompts';
 
 import { createApp } from './builder';
 import { isEmpty } from './helper';
-import { isValidPackageName } from './npm-utils';
+import { isValidPackageName, notifyUpdate } from './npm-utils';
 
 (async () => {
   try {
@@ -91,6 +91,7 @@ import { isValidPackageName } from './npm-utils';
           ? ['browser']
           : (answers.env as string[]),
     });
+    await notifyUpdate();
   } catch (e: any) {
     console.error(e.message);
   }

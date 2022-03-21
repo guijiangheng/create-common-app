@@ -1,5 +1,9 @@
+import chalk from 'chalk';
 import * as spawn from 'cross-spawn';
 import _debug from 'debug';
+import checkoutForUpdate from 'update-check';
+
+import packageJson from '../package.json';
 
 const debug = _debug('app:npm-utils');
 
@@ -135,4 +139,21 @@ export const installDependencies = (
   }
 
   return true;
+};
+
+export const notifyUpdate = async () => {
+  try {
+    const result = await checkoutForUpdate(packageJson);
+
+    if (result?.latest) {
+      console.log(
+        chalk.yellow.bold('A new version of `create-common-app` is available!'),
+      );
+      console.log(
+        'You can update by running: npm install --global create-common-app',
+      );
+    }
+  } catch {
+    // ignore
+  }
 };

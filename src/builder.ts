@@ -242,8 +242,8 @@ export const createApp = (answers: Answer) => {
     .join('-');
 
   debug('Copy template folder into target folder');
-  copyDir(path.resolve(__dirname, 'templates', template), root);
-  copyDir(path.resolve(__dirname, 'templates', 'common'), root, {
+  copyDir(path.resolve(__dirname, '../templates', template), root);
+  copyDir(path.resolve(__dirname, '../templates', 'common'), root, {
     rename: (file) =>
       ['gitignore', 'editorconfig', 'eslintignore', 'prettierrc'].includes(file)
         ? '.'.concat(file)

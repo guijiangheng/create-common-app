@@ -1,6 +1,6 @@
 {
   "name": "create-common-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Create template project with one command",
   "scripts": {
     "copyfiles": "cp -r templates bin",
@@ -20,7 +20,7 @@
   "author": "guijiangheng <kakaxizhh@gmail.com>",
   "license": "MIT",
   "bin": {
-    "create-common-app": "./bin/index.js"
+    "create-common-app": "./bin/src/index.js"
   },
   "files": [
     "bin"

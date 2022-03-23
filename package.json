@@ -1,11 +1,11 @@
 {
   "name": "create-common-app",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Create template project with one command",
   "scripts": {
     "copyfiles": "cp -r templates bin",
-    "dev": "yarn build && DEBUG=app:* node ./bin/index.js",
-    "build": "rimraf ./bin && tsc && yarn copyfiles"
+    "dev": "yarn build && DEBUG=app:* node ./bin/src/index.js",
+    "build": "rimraf ./bin && tsc && yarn copyfiles && chmod u+x ./bin/src/index.js"
   },
   "keywords": [
     "react",

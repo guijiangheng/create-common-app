@@ -48,6 +48,7 @@ export const getDependencies = (answers: Answer) => {
       'husky',
       '@commitlint/cli',
       '@commitlint/config-conventional',
+      'prettier',
       'pretty-quick',
     ].filter(Boolean) as string[],
   ] as const;
@@ -96,6 +97,7 @@ export const getEsLintDevDependencies = (config: any) => {
 
 export const getEslintConfigs = (answers: Answer) => {
   const { framework, typescript, env } = answers;
+  const isNext = framework === 'next';
   const isReact = ['vite', 'next'].includes(framework);
 
   const config: Record<string, any> = {
@@ -140,13 +142,26 @@ export const getEslintConfigs = (answers: Answer) => {
     });
   }
 
+  if (isNext) {
+    Object.assign(config.rules, {
+      'jsx-a11y/anchor-is-valid': [
+        'error',
+        {
+          components: ['Link'],
+          specialLink: ['hrefLeft', 'hrefRight'],
+          aspects: ['invalidHref', 'preferButton'],
+        },
+      ],
+    });
+  }
+
   if (framework === 'none') {
     env.forEach((item) => {
       config.env[item] = true;
     });
   } else if (framework === 'vite') {
     config.env.browser = true;
-  } else if (framework === 'next') {
+  } else if (isNext) {
     config.env.browser = true;
     config.env.node = true;
   }
@@ -166,7 +181,7 @@ export const getEslintConfigs = (answers: Answer) => {
     typescript && 'plugin:@typescript-eslint/recommended',
     typescript &&
       'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    framework === 'next' && 'next/core-web-vitals',
+    isNext && 'next/core-web-vitals',
     'prettier',
   ].filter(Boolean);
 
